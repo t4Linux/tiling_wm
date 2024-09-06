@@ -1,0 +1,18 @@
+#!/bin/bash
+# Multimonitor configuration
+
+if [[ $(xrandr -q | grep " connected " | wc -l) == "1" ]]; then
+  xrandr --output eDP-1 --mode 1920x1080 --rotate normal &
+  $HOME/.config/herbstluftwm/polybar/launch_one.sh &
+  hc rename_monitor 0 eDP-1
+elif [[ $(xrandr -q | grep " connected " | wc -l) == "2" ]]; then
+  xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal
+  ~/.config/herbstluftwm/polybar/launch.sh &
+  hc rename_monitor 0 eDP-1
+  hc rename_monitor 1 HDMI-1
+elif [[ $(xrandr -q | grep " connected " | wc -l) == "3" ]]; then
+  xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off --output HDMI-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-2 --mode 1920x1080 --pos 3840x0 --rotate normal --output HDMI-2 --off
+  hc rename_monitor 0 eDP-1
+  hc rename_monitor 1 HDMI-1
+  hc rename_monitor 2 DP-2
+fi
