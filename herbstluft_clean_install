@@ -8,7 +8,7 @@ if [[ ! -d $BA ]]; then
 fi
 
 nala() {
-  curl -LOP $BA https://gitlab.com/-/project/31927362/uploads/1164b1c240e4cdacc652b3dd5953c3d1/nala_0.15.4_all.deb
+  curl -Lo $BA$(basename https://gitlab.com/-/project/31927362/uploads/1164b1c240e4cdacc652b3dd5953c3d1/nala_0.15.4_all.deb) https://gitlab.com/-/project/31927362/uploads/1164b1c240e4cdacc652b3dd5953c3d1/nala_0.15.4_all.deb
   sudo apt install -y $BA/nala_0.15.4_all.deb
   echo "Nala installation successful"
 }
@@ -22,14 +22,14 @@ bat() {
   local ver=$(curl -s https://github.com/sharkdp/bat/releases | grep -m 1 -A 4 wb-break-all | awk 'END{print}' | awk -F "\"" '{print $2}' | awk -F "/" '{print $NF}' | sed -e '1s/^.//')
   # setting latest download file and installation
   local bfile=bat-musl_"$ver"_amd64.deb
-  curl -LOP $BA https://github.com/sharkdp/bat/releases/download/v"$ver"/$bfile
+  curl -Lo $BA$(basename https://github.com/sharkdp/bat/releases/download/v"$ver"/$bfile) https://github.com/sharkdp/bat/releases/download/v"$ver"/$bfile
   sudo nala install -y $BA/$bfile
   echo "Bat installation successful"
 }
 
 lg() {
   LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-  curl -LOP lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+  curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
   tar xf lazygit.tar.gz lazygit
   sudo install lazygit /usr/local/bin
   rm lazygit.tar.gz
@@ -41,7 +41,7 @@ delta() {
   local ver=$(curl -s https://lib.rs/crates/git-delta | grep -A 4 "versions" | awk 'END{print}')
   # setting latest download file and installation
   local dfile=git-delta-musl_"$ver"_amd64.deb
-  curl -LOP $BA https://github.com/dandavison/delta/releases/download/"$ver"/$dfile
+  curl -Lo $BA$(basename https://github.com/dandavison/delta/releases/download/"$ver"/$dfile) https://github.com/dandavison/delta/releases/download/"$ver"/$dfile
   sudo nala install -y $BA/$dfile
   echo "Delta installation successful"
 }
@@ -72,7 +72,7 @@ devour() {
 }
 
 ripgrep() {
-  curl -LOP $BA https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep_14.1.0-1_amd64.deb
+  curl -Lo $BA$(basename https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep_14.1.0-1_amd64.deb) https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep_14.1.0-1_amd64.deb
   sudo nala install $BA/ripgrep_14.1.0-1_amd64.deb
 }
 
@@ -83,6 +83,6 @@ dunst() {
 }
 
 herbstluftwm() {
-  curl -LOP $BA http://ftp.de.debian.org/debian/pool/main/h/herbstluftwm/herbstluftwm_0.9.5-3+b1_amd64.deb
+  curl -Lo $BA$(basename http://ftp.de.debian.org/debian/pool/main/h/herbstluftwm/herbstluftwm_0.9.5-3+b1_amd64.deb) http://ftp.de.debian.org/debian/pool/main/h/herbstluftwm/herbstluftwm_0.9.5-3+b1_amd64.deb
   sudo nala install -y $BA/herbstluftwm_0.9.5-3+b1_amd64.deb
 }
