@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo -e "The file will be downloaded to your home directory"\n
+sleep 2
+cd $HOME
+git clone https://github.com/neovim/neovim
+cd $HOME/neovim
+git checkout stable
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+cd build && cpack -G DEB && sudo dpkg -i nvim-linux64.deb
+mv $HOME/neovim/build/nvim-linux64.deb $HOME/nvim-linux64.deb
+cd $HOME && rm -fr neovim

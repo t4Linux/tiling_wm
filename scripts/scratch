@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+case "$1" in
+
+scratchpad)
+	entry="kitty --class scpad -T scratchpad"
+	;;
+Proton)
+	entry="proton-mail"
+	;;
+calc)
+	entry="gnome-calculator"
+	;;
+Music)
+	entry="alacritty -t Music -e ncmpcpp"
+	;;
+Todo)
+	entry="alacritty -t Todo -e schedule.sh"
+	;;
+esac
+
+xdotool search --onlyvisible --name "$1" windowunmap ||
+	xdotool search --name "$1" windowmap ||
+	$entry &
