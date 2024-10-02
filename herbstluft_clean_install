@@ -7,48 +7,53 @@ if [[ ! -d $BA ]]; then
   mkdir -p $BA/GitHub
 fi
 
-nala(){
+nala() {
   curl -LOP $BA https://gitlab.com/-/project/31927362/uploads/1164b1c240e4cdacc652b3dd5953c3d1/nala_0.15.4_all.deb
   sudo apt install -y $BA/nala_0.15.4_all.deb
-  echo "Nala installation successful" }
+  echo "Nala installation successful"
+}
 
-base_install(){
+base_install() {
   sudo nala install -y cmake gettext luarocks rofi polybar sxhkd openssh-server nitrogen picom exa
 }
 
-bat(){
+bat() {
   # checking for latest version of bat
   local ver=$(curl -s https://github.com/sharkdp/bat/releases | grep -m 1 -A 4 wb-break-all | awk 'END{print}' | awk -F "\"" '{print $2}' | awk -F "/" '{print $NF}' | sed -e '1s/^.//')
   # setting latest download file and installation
   local bfile=bat-musl_"$ver"_amd64.deb
   curl -LOP $BA https://github.com/sharkdp/bat/releases/download/v"$ver"/$bfile
   sudo nala install -y $BA/$bfile
-  echo "Bat installation successful" }
+  echo "Bat installation successful"
+}
 
-lg(){
+lg() {
   LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
   curl -LOP lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
   tar xf lazygit.tar.gz lazygit
   sudo install lazygit /usr/local/bin
   rm lazygit.tar.gz
-  echo "Lazygit installation successful" }
+  echo "Lazygit installation successful"
+}
 
-delta(){
+delta() {
   # checking for latest version of delta
   local ver=$(curl -s https://lib.rs/crates/git-delta | grep -A 4 "versions" | awk 'END{print}')
   # setting latest download file and installation
   local dfile=git-delta-musl_"$ver"_amd64.deb
   curl -LOP $BA https://github.com/dandavison/delta/releases/download/"$ver"/$dfile
   sudo nala install -y $BA/$dfile
-  echo "Delta installation successful" }
+  echo "Delta installation successful"
+}
 
-docker(){
+docker() {
   curl -fsSL https://get.docker.com -o get-docker.sh
   sudo sh get-docker.sh
   rm get-docker.sh
-  echo "docker installation successful" }
+  echo "docker installation successful"
+}
 
-clipmenu(){
+clipmenu() {
   sudo nala install -y libx11-dev libxfixes-dev xsel rofi
   git clone https://github.com/cdown/clipnotify.git $BAG
   cd $BAG/clipnotify
@@ -57,22 +62,27 @@ clipmenu(){
   cd $BAG/clipmenu
   make && sudo make install
   systemctl --user import-environment DISPLAY
-  systemctl --user enable --now clipmenud }
+  systemctl --user enable --now clipmenud
+}
 
-devour(){
+devour() {
   git https://github.com/salman-abedin/devour.git $BAG
   cd $BAG/devour
-  make && sudo make install }
+  make && sudo make install
+}
 
-ripgrep(){
+ripgrep() {
   curl -LOP $BA https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep_14.1.0-1_amd64.deb
-  sudo nala install $BA/ripgrep_14.1.0-1_amd64.deb }
+  sudo nala install $BA/ripgrep_14.1.0-1_amd64.deb
+}
 
-dunst(){
+dunst() {
   git clone https://github.com/dunst-project/dunst.git $BAG
   cd $BAG/dunst
-  make && sudo make install }
+  make && sudo make install
+}
 
-herbstluftwm(){
-  curl -LOP $BA http://ftp.de.debian.org/debian/pool/main/h/herbstluftwm/herbstluftwm_0.9.5-3+b1_amd64.deb 
-  sudo nala install -y $BA/herbstluftwm_0.9.5-3+b1_amd64.deb }
+herbstluftwm() {
+  curl -LOP $BA http://ftp.de.debian.org/debian/pool/main/h/herbstluftwm/herbstluftwm_0.9.5-3+b1_amd64.deb
+  sudo nala install -y $BA/herbstluftwm_0.9.5-3+b1_amd64.deb
+}
