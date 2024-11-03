@@ -25,7 +25,10 @@ shift + XF86AudioPlay
 XF86AudioPlay
   playerctl --all-players play-pause
   # play_pause.sh
+  #
 
+XF86AudioMicMute
+  terminator
 # Super_L; @Super_L
 #     rofi -show drun
 
@@ -87,8 +90,8 @@ super + p
   # xterm -fa 'Monospace' -fs 11 -bg Gray19 -e power.sh
 
 # sound switch
-super + s
-  alacritty -t sound_switch.sh -e sound_switch.sh
+super + s ; {s,m}
+  {alacritty -t sound_switch.sh -e sound_switch.sh, alacritty -t mic_switch.sh -e mic_switch.sh}
 # super + s ; {s,d}
 #  {alacritty -t sound_switch.sh -e sound_switch.sh, alacritty -t sound_switch_default.sh -e sound_switch_default.sh}
 
@@ -103,6 +106,12 @@ super + n
 super + Escape
 	pkill -USR1 -x sxhkd;notify-send 'sxhkd' '\nReloaded config'
 
+super + l
+  nitrogen --restore
+
 # restart polybar
 super + shift + o
 	~/.config/herbstluftwm/polybar/launch.sh
+
+super + shift + p
+	~/.config/herbstluftwm/polybar/launch_work.sh

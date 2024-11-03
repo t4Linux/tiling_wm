@@ -16,17 +16,15 @@ export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
 export GTK_THEME="Adwaita:dark" nautilus
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/keyring/ssh
 
-nitrogen --restore &
 sed -i 's/monitor = 1/monitor = 0/g' ~/.config/dunst/dunstrc
 dunst &
-spice-vdagent &
 eval $(/usr/bin/gnome-keyring-daemon --start --components=ssh,gpg,pkcs11,secrets) &
 eval "$(ssh-agent -s)" &
+spice-vdagent &
 ssh-add &
 ~/.local/bin/monitors.sh &
 ~/.config/herbstluftwm/polybar/launch.sh &
 picom --config ~/.config/dk/picom.conf &
-protonvpn-app &
 
 ########################################
 # (re)load sxhkd for keybinds
@@ -164,9 +162,10 @@ hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
 hc rule fixedsize floating=on
 
-hc rule title~'power.sh' floating=on floatplacement=center floating_geometry=375x250
+hc rule title~'power.sh' floating=on floatplacement=center floating_geometry=375x200
 hc rule title~'notification.sh' floating=on floatplacement=center floating_geometry=375x150
 hc rule title~'sound_switch.sh' floating=on floatplacement=center floating_geometry=375x150
+hc rule title~'mic_switch.sh' floating=on floatplacement=center floating_geometry=375x130
 hc rule title~'sound_switch_default.sh' floating=on floatplacement=center floating_geometry=375x150
 hc rule title~'scratchpad' floating=on floatplacement=center floating_geometry=1100x800
 hc rule title~'popup-calendar' floating=on
@@ -184,6 +183,8 @@ hc unlock
 # or simply:
 hc detect_monitors
 hc use 1_1
+nitrogen --restore &
+protonvpn-app &
 
 # find the panel
 # panel=~/.config/herbstluftwm/panel.sh

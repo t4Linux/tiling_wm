@@ -11,9 +11,9 @@ hc keyunbind --ALL
 #           SYSTEM                #
 ###################################
 hc keybind $Mod-space \
-	or , and . compare tags.focus.curframe_wcount = 2 \
-	. cycle_layout +1 vertical horizontal grid \
-	, cycle_layout +1
+  or , and . compare tags.focus.curframe_wcount = 2 \
+  . cycle_layout +1 vertical horizontal grid \
+  , cycle_layout +1
 
 # herbstluftwm
 
@@ -67,6 +67,8 @@ hc mousebind $Mod-Button3 resize
 
 hc set swap_monitors_to_get_tag false
 hc set focus_crosses_monitor_boundaries true
+hc keybind Mod4-1 focus_monitor 0
+hc keybind Mod4-2 focus_monitor 1
 
 # basic movement in tiling and floating mode
 # focusing clients
